@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
       
       setIsAuth(true);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       
       alert("登入失敗");
     }
@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
   const checkUserLogin = async () => {
     try {
       await axios.post(`${BASE_URL}/v2/api/user/check`);
-      console.log("驗證成功!");
+      //console.log("驗證成功!");
       //setIsAuth(true);
     } catch (error) {
       navigate('/admin/login');

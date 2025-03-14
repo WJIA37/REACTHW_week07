@@ -54,7 +54,7 @@ export default function AdminProductsPage() {
       setPageInfo(res.data.pagination);
     } catch (error) {
       alert("取得產品失敗");
-      console.log(error.message)
+      //console.log(error.message)
     } finally{
       setIsScreenLoading(false);//取得API之後關閉全螢幕loading狀態
     } 
@@ -294,7 +294,7 @@ const handleOpenProductModal = (mode, product) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((product) => (
+                  {products?.map((product) => (
                     <tr key={product.id}>
                       <th scope="row">{product.title}</th>
                       <td>{product.origin_price}</td>
