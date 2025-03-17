@@ -1,8 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 
 const adminRoutes = [
-  { path: "/admin/login/products", name: "新增產品" },
-  { path: "/admin/login/orders", name: "客戶訂單" },
+  { path: "/admin/products", name: "新增產品" },
+  { path: "/admin/orders", name: "客戶訂單" },
 ];
 
 export default function AdminOrdersPage() {

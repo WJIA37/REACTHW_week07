@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import AdminProductsPage from "./admin/AdminProductsPage";
+import AdminLayout from "../layouts/AdminLayout";
 
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const API_PATH = import.meta.env.VITE_API_PATH;
 
 
 export default function AdminLoginPage() {
@@ -31,16 +31,14 @@ export default function AdminLoginPage() {
       const res = await axios.post(`${BASE_URL}/v2/admin/signin`, account);
 
       const { token, expired } = res.data;
+            // 儲存 Token
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-
       axios.defaults.headers.common["Authorization"] = token;
-
-
       
-      setIsAuth(true);
+      //setIsAuth(true);
+      //登入成功後，立即跳轉到後台
+      navigate("/admin/products");
     } catch (error) {
-      //console.log(error);
-      
       alert("登入失敗");
     }
   };
@@ -48,11 +46,12 @@ export default function AdminLoginPage() {
   const checkUserLogin = async () => {
     try {
       await axios.post(`${BASE_URL}/v2/api/user/check`);
-      //console.log("驗證成功!");
+      console.log("驗證成功!");
       //setIsAuth(true);
+      navigate('/login');
     } catch (error) {
-      navigate('/admin/login');
-      console.error(error);
+      navigate('/');
+      //console.error(error);
     }
   };
 
@@ -69,7 +68,7 @@ export default function AdminLoginPage() {
 
   return (
     <>
-      {isAuth ? (<AdminProductsPage />) : <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+      {isAuth ? (<AdminLayout />) : <div className="d-flex flex-column justify-content-center align-items-center vh-100">
         <h1 className="mb-5">請先登入</h1>
         <form onSubmit={handleLogin} className="d-flex flex-column gap-3">
           <div className="form-floating mb-3">

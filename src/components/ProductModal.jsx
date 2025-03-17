@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Modal } from "bootstrap";
-import { use } from "react";
 import { useDispatch } from "react-redux";
 import { pushMessage } from "../redux/toastSlice";
 
@@ -20,11 +19,17 @@ function ProductModal({
 
   const [modalData, setModalData] = useState(tempProduct);
 
-  useEffect(() =>{
-    setModalData({
-      ...tempProduct
-    })
-  },[tempProduct]);
+  useEffect(() => {
+    if (modalMode === "create") {
+      setModalData((prevData) => ({
+        ...prevData, // 確保其他欄位不會有意外影響
+        series: "",  // 強制清空系列名稱
+      }));
+    } else {
+      setModalData({ ...tempProduct });
+    }
+  }, [modalMode, tempProduct]);
+  
 
   const productModalRef = useRef(null);
 
@@ -47,7 +52,6 @@ function ProductModal({
   const handleCloseProductModal = () => {
     const modalInstance = Modal.getInstance(productModalRef.current);
     modalInstance.hide();
-
     setIsOpen(false);
   };
 
@@ -69,6 +73,7 @@ function ProductModal({
     });
   };
 
+  // 新增圖片
   const handleAddImage = () => {
     const newImages = [...modalData.imagesUrl, ""];
     setModalData({
@@ -77,6 +82,7 @@ function ProductModal({
     });
   };
 
+  // 移除圖片
   const handleRemoveImage = () => {
     const newImages = [...modalData.imagesUrl];
     newImages.pop();
@@ -96,12 +102,15 @@ function ProductModal({
           is_enabled: modalData.is_enabled ? 1 : 0,
         },
       });
+      handleCloseProductModal();
+      dispatch(pushMessage({
+        text: "新增產品成功",
+        status: "success"
+      }))
     } catch (error) {
       //alert("新增產品失敗");
       //console.log(error);
-      
       const { message } = error.response.data;
-
       dispatch(pushMessage({
         text: message.join("、"),
         status: "failed"
@@ -121,12 +130,17 @@ function ProductModal({
             is_enabled: modalData.is_enabled ? 1 : 0,
           },
         });
+        handleCloseProductModal();
         dispatch(pushMessage({
           text: "編輯產品成功",
           status: "success"
         }))
     } catch (error) {
-      alert("編輯產品失敗");
+      const { message } = error.response.data;
+      dispatch(pushMessage({
+        text: message.join("、"),
+        status: "failed"
+      }))
     }
   };
 
@@ -137,7 +151,7 @@ function ProductModal({
       await apiCall();
       getProducts();
 
-      handleCloseProductModal();
+      //handleCloseProductModal(true);
     } catch (error) {
       alert("新增產品失敗");
     }
@@ -153,7 +167,6 @@ function ProductModal({
         `${BASE_URL}/v2/api/${API_PATH}/admin/upload`,
         formData
       );
-
       const uploadedImageUrl = res.data.imageUrl;
       setModalData({
         ...modalData,
@@ -251,7 +264,7 @@ function ProductModal({
                   ))}
 
                   <div className="btn-group w-100">
-                    {modalData.imagesUrl.length < 5 &&
+                    {modalData.imagesUrl?.length < 5 &&
                       modalData.imagesUrl[
                         modalData.imagesUrl.length - 1
                       ] !== "" && (
@@ -344,6 +357,7 @@ function ProductModal({
                       原價
                     </label>
                     <input
+                       min="0"
                       value={modalData.origin_price}
                       onChange={handleModalInputChange}
                       name="origin_price"
@@ -358,6 +372,7 @@ function ProductModal({
                       售價
                     </label>
                     <input
+                       min="0"
                       value={modalData.price}
                       onChange={handleModalInputChange}
                       name="price"

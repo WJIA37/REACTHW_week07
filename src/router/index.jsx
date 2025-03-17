@@ -34,17 +34,13 @@ const router = createHashRouter([
     ],
   },
   {
-    path: 'adminLogin',
+    path: '/login',
     element: <AdminLoginPage />,
   },
   {
-    path: '/admin/login',
+    path: '/admin',
     element: <AdminLayout />,
     children:[
-      {
-        path:'',
-        element:<AdminLoginPage />,
-      },
       {
         path:'orders',
         element:<AdminOrdersPage />,

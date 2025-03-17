@@ -27,8 +27,8 @@ const defaultModalState = {
 };
 
 const adminRoutes = [
-  { path: "/admin/login/products", name: "新增產品" },
-  { path: "/admin/login/orders", name: "客戶訂單" },
+  { path: "/admin/products", name: "新增產品" },
+  { path: "/admin/orders", name: "客戶訂單" },
 ];
 
 export default function AdminProductsPage() {
@@ -294,7 +294,7 @@ const handleOpenProductModal = (mode, product) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {products?.map((product) => (
+                  {products.map((product) => (
                     <tr key={product.id}>
                       <th scope="row">{product.title}</th>
                       <td>{product.origin_price}</td>
