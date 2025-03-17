@@ -266,7 +266,7 @@ function ProductModal({
                   <div className="btn-group w-100">
                     {modalData.imagesUrl?.length < 5 &&
                       modalData.imagesUrl[
-                        modalData.imagesUrl.length - 1
+                        modalData.imagesUrl?.length - 1
                       ] !== "" && (
                         <button
                           onClick={handleAddImage}

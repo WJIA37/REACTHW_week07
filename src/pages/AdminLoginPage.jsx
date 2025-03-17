@@ -33,9 +33,9 @@ export default function AdminLoginPage() {
       const { token, expired } = res.data;
             // 儲存 Token
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-      axios.defaults.headers.common["Authorization"] = token;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       
-      //setIsAuth(true);
+      setIsAuth(true);
       //登入成功後，立即跳轉到後台
       navigate("/admin/products");
     } catch (error) {
@@ -50,8 +50,7 @@ export default function AdminLoginPage() {
       //setIsAuth(true);
       navigate('/admin/products');
     } catch (error) {
-      navigate('/');
-      //console.error(error);
+      console.error(error);
     }
   };
 
@@ -68,7 +67,7 @@ export default function AdminLoginPage() {
 
   return (
     <>
-      {isAuth ? (<AdminLayout />) : <div className="d-flex flex-column justify-content-center align-items-center vh-100">
+      {isAuth ? (<AdminLoginPage />) : <div className="d-flex flex-column justify-content-center align-items-center vh-100">
         <h1 className="mb-5">請先登入</h1>
         <form onSubmit={handleLogin} className="d-flex flex-column gap-3">
           <div className="form-floating mb-3">

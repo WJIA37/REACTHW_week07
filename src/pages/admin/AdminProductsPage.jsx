@@ -54,7 +54,7 @@ export default function AdminProductsPage() {
       setPageInfo(res.data.pagination);
     } catch (error) {
       alert("取得產品失敗");
-      //console.log(error.message)
+      console.log(error.message)
     } finally{
       setIsScreenLoading(false);//取得API之後關閉全螢幕loading狀態
     } 
@@ -243,7 +243,7 @@ const handleOpenProductModal = (mode, product) => {
   const handleLogout = async () => {
     try {
       await axios.post(`${BASE_URL}/v2/logout`);
-      navigate("/adminLogin");
+      navigate("/login");
     } catch (error) {
       alert("登出失敗");
     };
