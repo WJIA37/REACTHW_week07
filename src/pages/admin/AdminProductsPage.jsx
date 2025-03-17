@@ -242,7 +242,7 @@ const handleOpenProductModal = (mode, product) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${BASE_URL}/v2/logout`);
+      await axios.post(`${BASE_URL}/v2/logout/`);
       navigate("/login");
     } catch (error) {
       alert("登出失敗");
