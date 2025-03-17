@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
       await axios.post(`${BASE_URL}/v2/api/user/check`);
       console.log("驗證成功!");
       //setIsAuth(true);
-      navigate('/login');
+      navigate('/admin/products');
     } catch (error) {
       navigate('/');
       //console.error(error);
