@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {  useNavigate } from "react-router-dom";
-import AdminProductsPage from "./admin/AdminProductsPage";
 import AdminLayout from "../layouts/AdminLayout";
 
 
@@ -33,7 +32,7 @@ export default function AdminLoginPage() {
       const { token, expired } = res.data;
             // 儲存 Token
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      axios.defaults.headers.common["Authorization"] = token ;
       
       //setIsAuth(true);
       //登入成功後，立即跳轉到後台
@@ -50,7 +49,7 @@ export default function AdminLoginPage() {
       //setIsAuth(true);
       //navigate('/admin/products');
     } catch (error) {
-      console.log("驗證失敗!");
+      alert("驗證失敗!");
     }
   };
 

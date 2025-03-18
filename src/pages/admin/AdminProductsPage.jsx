@@ -54,7 +54,7 @@ export default function AdminProductsPage() {
       setPageInfo(res.data.pagination);
     } catch (error) {
       alert("取得產品失敗");
-      console.log(error.message)
+      //console.log(error.message)
     } finally{
       setIsScreenLoading(false);//取得API之後關閉全螢幕loading狀態
     } 
@@ -97,144 +97,12 @@ const handleOpenProductModal = (mode, product) => {
   // modalInstance.show();
 };
 
-//   const handleCloseProductModal = () => {
-//   const modalInstance = Modal.getInstance(productModalRef.current);
-//   modalInstance.hide();
-// };
-
-
   const handleOpenDelProductModal = (product) => {
   setTempProduct(product);
   setIsDelProductModalOpen(true)
   // const modalInstance = Modal.getInstance(delProductModalRef.current);
   // modalInstance.show();
 };
-
-//   const handleCloseDelProductModal = () => {
-//   const modalInstance = Modal.getInstance(delProductModalRef.current);
-//   modalInstance.hide();
-// };
-
-//   const handleModalInputChange = (e) => {
-//   const { value, name, checked, type } = e.target;
-
-//   setTempProduct({
-//     ...tempProduct,
-//     [name]: type === "checkbox" ? checked : value,
-//   });
-//   };
-
-//   const handleImageChange = (e, index) => {
-//   const { value } = e.target;
-//   const newImages = [...tempProduct.imagesUrl];
-
-//   newImages[index] = value;
-
-//   setTempProduct({
-//     ...tempProduct,
-//     imagesUrl: newImages,
-//   });
-//   };
-
-//   const handleAddImage = () => {
-//   const newImages = [...tempProduct.imagesUrl, ""];
-
-//   setTempProduct({
-//     ...tempProduct,
-//     imagesUrl: newImages,
-//   });
-//   };
-
-//   const handleRemoveImage = () => {
-//   const newImages = [...tempProduct.imagesUrl];
-
-//   newImages.pop();
-
-//   setTempProduct({
-//     ...tempProduct,
-//     imagesUrl: newImages,
-//   });
-//   };
-
-  // const createProduct = async () => {
-  // try {
-  //   await axios.post(`${BASE_URL}/v2/api/${API_PATH}/admin/product`, {
-  //     data: {
-  //       ...tempProduct,
-  //       origin_price: Number(tempProduct.origin_price),
-  //       price: Number(tempProduct.price),
-  //       is_enabled: tempProduct.is_enabled ? 1 : 0,
-  //     },
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-    
-  //   alert("新增產品失敗");
-  // }
-  // };
-
-  // const updateProduct = async () => {
-  // try {
-  //   await axios.put(
-  //     `${BASE_URL}/v2/api/${API_PATH}/admin/product/${tempProduct.id}`,
-  //     {
-  //       data: {
-  //         ...tempProduct,
-  //         origin_price: Number(tempProduct.origin_price),
-  //         price: Number(tempProduct.price),
-  //         is_enabled: tempProduct.is_enabled ? 1 : 0,
-  //       },
-  //     }
-  //   );
-  // } catch (error) {
-  //   alert("編輯產品失敗");
-  // }
-  // };
-
-  // const deleteProduct = async () => {
-  // try {
-  //   await axios.delete(
-  //     `${BASE_URL}/v2/api/${API_PATH}/admin/product/${tempProduct.id}`,
-  //     {
-  //       data: {
-  //         ...tempProduct,
-  //         origin_price: Number(tempProduct.origin_price),
-  //         price: Number(tempProduct.price),
-  //         is_enabled: tempProduct.is_enabled ? 1 : 0,
-  //       },
-  //     }
-  //   );
-  // } catch (error) {
-  //   console.log(error);
-    
-  //   alert("刪除產品失敗");
-  // }
-  // };
-
-
-
-  // const handleUpdateProduct = async () => {
-  // const apiCall = modalMode === "create" ? createProduct : updateProduct;
-
-  // try {
-  //   await apiCall();
-  //   getProducts();
-
-  //   handleCloseProductModal();
-  // } catch (error) {
-  //   alert("新增產品失敗");
-  // }
-  // };
-
-  // const handleDeleteProduct = async() =>{
-  // try {
-  //   await deleteProduct();
-  //   getProducts();
-  //   handleCloseDelProductModal();
-  // } catch (error) {
-  //   alert("刪除產品失敗");
-  // }
-  // }
 
   const handlePageChange = (page) => {
     getProducts(page);

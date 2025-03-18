@@ -10,9 +10,7 @@ function Pagination({
             {/*判斷pageInfo有沒有上一頁,如果false加一個Class="disabled"加一個Class="disabled"*/}
             <button type="button"
               onClick={() => handlePageChange(pageInfo.current_page - 1)}
-              className="page-link"
-              href="#"
-            >
+              className="page-link">
               上一頁
             </button>
           </li>
@@ -26,9 +24,7 @@ function Pagination({
               {/*判斷current_page === index + 1加一個Class="active"*/}
               <button type="button"
                 onClick={() => handlePageChange(index + 1)}
-                className="page-link"
-                href="#"
-              >
+                className="page-link">
                 {index + 1}
               </button>
             </li>

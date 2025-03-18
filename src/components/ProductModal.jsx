@@ -29,6 +29,14 @@ function ProductModal({
       setModalData({ ...tempProduct });
     }
   }, [modalMode, tempProduct]);
+
+  //清空上一筆資料
+  useEffect(() =>{
+    setModalData({
+      ...tempProduct,
+      series:"",
+    })
+  },[tempProduct])
   
 
   const productModalRef = useRef(null);
@@ -275,7 +283,7 @@ function ProductModal({
                           新增圖片
                         </button>
                       )}
-                    {modalData.imagesUrl.length > 1 && (
+                    {modalData.imagesUrl?.length > 1 && (
                       <button
                         onClick={handleRemoveImage}
                         className="btn btn-outline-danger btn-sm w-100"

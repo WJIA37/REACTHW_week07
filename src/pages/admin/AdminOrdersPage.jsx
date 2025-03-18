@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const adminRoutes = [
   { path: "/admin/products", name: "新增產品" },
